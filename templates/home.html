@@ -1,0 +1,40 @@
+<!-- home.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Home</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ username }}!</h1><br>
+
+        <h2>Manage Your Passwords:</h2>
+        <!-- Display success messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                {% if category == 'success' %}
+                    <div class="flash-message success">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+        {% endwith %}
+
+        <p>
+            <button><a href="/add_password">Add Password</a></button><br><br>
+            <button><a href="/retrieve_password">Retrieve Password</a></button><br><br>
+            <button><a href="/edit_password">Edit Password</a></button><br><br>
+            <button><a href="/delete_password">Delete Password</a></button><br><br><br>
+
+        </p>
+
+        <button><a href="/logout">Logout</a></button><br><br><br>
+        <form method="POST" action="/delete_account">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete your account?')">Delete Account</button>
+        </form>
+        <!-- Additional content of the home page -->
+    </div>
+</body>
+</html>
+
